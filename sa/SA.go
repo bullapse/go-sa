@@ -8,7 +8,8 @@ import (
 type SA struct {
 	t int		// Initial Temperature
 	c float64	// Cooling Rate
-	r tspsa.Route
+	b tspsa.Route   // best Route
+	n tspsa.Route	// Next Current Route
 }
 
 /*
@@ -38,9 +39,11 @@ func (sa *SA) RunSAFromFile(s string) {
 }
 
 func (sa *SA) RunSA(n []Node) {
-	l := sa.r.Cities()
-	// best route so far
-	var b []Node
+	// Set the Routes for the current SA given the list of nodes
+	sa.b = n
+	sa.c = n
+	// get the length
+	l := sa.n.Cities()
 	// current
 	cs := n
 	for sa.t > 1 {
@@ -48,8 +51,9 @@ func (sa *SA) RunSA(n []Node) {
 		t := cs
 		fp := rand.Intn(l)
 		sp := rand.Intn(l)
-		sa.r.SwapNodes(fp, sp)
-
+		sa.n.SwapNodes(fp, sp)
+		// get the current energy
+		// get the next energy
 	}
 
 

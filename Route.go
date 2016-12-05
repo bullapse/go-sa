@@ -35,10 +35,10 @@ func (r *Route) Cities() int {
  */
 func (r *Route) calcDistance() float64 {
 	if r.d == 0 {
-		for i := 0; i < r.cities(); i++ {
+		for i := 0; i < r.Cities(); i++ {
 			s := r.r[i]
 			var e sa.Node
-			if i+1 < r.cities() {
+			if i+1 < r.Cities() {
 				e = r.r[i+1]
 			} else {
 				e = r.r[0]
@@ -51,7 +51,7 @@ func (r *Route) calcDistance() float64 {
 
 func (r *Route) String() string {
 	t := ""
-	for i := 0; i < r.cities(); i++ {
+	for i := 0; i < r.Cities(); i++ {
 		t += r.r[i].String()
 	}
 	return t
