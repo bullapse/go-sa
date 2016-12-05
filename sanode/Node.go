@@ -11,7 +11,7 @@ type Node struct {
  *  Calculate the Euclidean distance between the two nodes
  *  return the distance (float64)
  */
-func (i *Node) getEuDistance(j *Node) float64 {
+func (i *Node) GetEuDistance(j *Node) float64 {
 	return math.Sqrt(math.Pow(float64(i.x - j.x), 2) + math.Pow(float64(i.y - j.y), 2))
 }
 
