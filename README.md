@@ -1,2 +1,10 @@
-# go-sa
-Simmulated annealing Algorithm implemented in GO
+# tsp-sa
+
+## Description
+Implementation of the Traveling Salesman Problem (TSP) usinng the Simmulated Annealing (SA) Algorithm written in GO.
+
+## Usage
+*assuming that your gopath is configured properly*
+ - `go build`
+ - `go install`
+ - `tsp-sa`
