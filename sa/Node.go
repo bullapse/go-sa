@@ -28,4 +28,3 @@ func (i *Node) String() string {
 func NewBlankNode(x int, y int) Node {
 	return Node{x,y}
 }
-

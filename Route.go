@@ -1,10 +1,17 @@
-package main
+package tspsa
 
 import "github.com/bullapse/tspsa/sa"
 
 type Route struct {
 	r []sa.Node			// Routes
 	d float64 			// distance
+}
+
+func (r *Route) SwapNodes(n1 int, n2 int) {
+	t1 := r.r[n1]
+	t2 := r.r[n2]
+	r.r[n1] = t2
+	r.r[n2] = t1
 }
 
 /*
@@ -18,7 +25,7 @@ func NewRoute(r []sa.Node) Route {
  * Return the nubmer of cities in the route
  * return: (int)
  */
-func (r *Route) cities() int {
+func (r *Route) Cities() int {
 	return len(r.r)
 }
 

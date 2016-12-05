@@ -1,13 +1,9 @@
-package main
+package tspsa
 
 import (
 	"github.com/bullapse/tspsa/sa"
 	"math/rand"
 )
-
-type TSPMAP struct {
-	m []sa.Node
-}
 
 /*
  * Create a random map for the TSP problem
@@ -16,38 +12,10 @@ type TSPMAP struct {
  * y: Max y cord
  * p: Number of points
  */
-func (m *TSPMAP) createRandomMAP(x int, y int, p int) {
+func CreateRandomMAP(x int, y int, p int) []sa.Node{
+	var r []sa.Node
 	for i := 0; i < p; i++ {
-		m.m = append(m.m, sa.NewBlankNode(rand.Intn(x), rand.Intn(y)))
+		r = append(r, sa.NewBlankNode(rand.Intn(x), rand.Intn(y)))
 	}
+	return r
 }
-
-/*
- * Calculate the number of nodes in our map
- * return: (int)
- */
-func (m *TSPMAP) numberOfNodes() int {
-	return len(m.m)
-}
-
-/*
- * Return a node inside TSPMAP's map of Nodes at index i
- * i: index
- * return: (*Node)
- */
-func (m *TSPMAP) getNode(i int) *sa.Node {
-	return &m.m[i]
-}
-
-
-/* TODO
- * Create a map from a CSV file
- */
-func (m *TSPMAP) createMAPFromFile(n string) {
-
-}
-
-func main() {
-
-}
-
