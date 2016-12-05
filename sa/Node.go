@@ -1,4 +1,4 @@
-package sanode
+package sa
 
 import "math"
 

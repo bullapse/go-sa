@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/bullapse/tspsa/sanode"
+	"github.com/bullapse/tspsa/sa"
 	"math/rand"
 )
 
 type TSPMAP struct {
-	m []sanode.Node
+	m []sa.Node
 }
 
 /*
@@ -18,7 +18,7 @@ type TSPMAP struct {
  */
 func (m *TSPMAP) createRandomMAP(x int, y int, p int) {
 	for i := 0; i < p; i++ {
-		m.m = append(m.m, sanode.NewBlankNode(rand.Intn(x), rand.Intn(y)))
+		m.m = append(m.m, sa.NewBlankNode(rand.Intn(x), rand.Intn(y)))
 	}
 }
 
@@ -35,7 +35,7 @@ func (m *TSPMAP) numberOfNodes() int {
  * i: index
  * return: (*Node)
  */
-func (m *TSPMAP) getNode(i int) *sanode.Node {
+func (m *TSPMAP) getNode(i int) *sa.Node {
 	return &m.m[i]
 }
 

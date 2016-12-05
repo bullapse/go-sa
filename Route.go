@@ -1,16 +1,16 @@
 package main
 
-import "github.com/bullapse/tspsa/sanode"
+import "github.com/bullapse/tspsa/sa"
 
 type Route struct {
-	r []sanode.Node			// Routes
+	r []sa.Node			// Routes
 	d float64 			// distance
 }
 
 /*
  * Create a new route from a given TSPMAP's Nodes
  */
-func NewRoute(r []sanode.Node) Route {
+func NewRoute(r []sa.Node) Route {
 	return Route{r,0}
 }
 
@@ -30,7 +30,7 @@ func (r *Route) calcDistance() float64 {
 	if r.d == 0 {
 		for i := 0; i < r.cities(); i++ {
 			s := r.r[i]
-			var e sanode.Node
+			var e sa.Node
 			if i+1 < r.cities() {
 				e = r.r[i+1]
 			} else {
