@@ -4,7 +4,6 @@
 package tspsa
 
 import (
-	"github.com/bullapse/tspsa/sa"
 	"math/rand"
 )
 
@@ -15,10 +14,10 @@ import (
  * y: Max y cord
  * p: Number of points
  */
-func CreateRandomMAP(x int, y int, p int) []sa.Node{
-	var r []sa.Node
+func CreateRandomMAP(x int, y int, p int) []Node{
+	var r []Node
 	for i := 0; i < p; i++ {
-		r = append(r, sa.NewBlankNode(rand.Intn(x), rand.Intn(y)))
+		r = append(r, NewBlankNode(rand.Intn(x), rand.Intn(y)))
 	}
 	return r
 }

@@ -1,4 +1,4 @@
-package sa
+package tspsa
 
 import "math"
 
@@ -19,7 +19,7 @@ func (i *Node) GetEuDistance(j *Node) float64 {
  * String function for Node
  */
 func (i *Node) String() string {
-	return "NODE: {\n\tX: " +  string(i.x) + "\n\tY: " + string(i.y) + "\n}"
+	return "NODE:\tX: " +  string(i.x) + "\tY: " + string(i.y) + "\n"
 }
 
 /*

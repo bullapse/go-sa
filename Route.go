@@ -1,23 +1,22 @@
 package tspsa
 
-import "github.com/bullapse/tspsa/sa"
 
 type Route struct {
-	r []sa.Node			// Routes
-	d float64 			// distance
+	R []Node			// Routes
+	D float64 			// distance
 }
 
 func (r *Route) SwapNodes(n1 int, n2 int) {
-	t1 := r.r[n1]
-	t2 := r.r[n2]
-	r.r[n1] = t2
-	r.r[n2] = t1
+	t1 := r.R[n1]
+	t2 := r.R[n2]
+	r.R[n1] = t2
+	r.R[n2] = t1
 }
 
 /*
  * Create a new route from a given TSPMAP's Nodes
  */
-func NewRoute(r []sa.Node) Route {
+func NewRoute(r []Node) Route {
 	return Route{r,0}
 }
 
@@ -26,33 +25,33 @@ func NewRoute(r []sa.Node) Route {
  * return: (int)
  */
 func (r *Route) Cities() int {
-	return len(r.r)
+	return len(r.R)
 }
 
 /*
  * Calculate the total route distance for the traveling salesman and return the float value
  * return: Route Distance (float64)
  */
-func (r *Route) calcDistance() float64 {
-	if r.d == 0 {
+func (r *Route) CalcDistance() float64 {
+	if r.D == 0 {
 		for i := 0; i < r.Cities(); i++ {
-			s := r.r[i]
-			var e sa.Node
+			s := r.R[i]
+			var e Node
 			if i+1 < r.Cities() {
-				e = r.r[i+1]
+				e = r.R[i+1]
 			} else {
-				e = r.r[0]
+				e = r.R[0]
 			}
-			r.d += s.GetEuDistance(&e)
+			r.D += s.GetEuDistance(&e)
 		}
 	}
-	return r.d
+	return r.D
 }
 
 func (r *Route) String() string {
 	t := ""
 	for i := 0; i < r.Cities(); i++ {
-		t += r.r[i].String()
+		t += r.R[i].String()
 	}
 	return t
 }
