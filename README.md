@@ -1,14 +1,18 @@
-# tsp-sa
+# tspsa (Traveling Salesman Problem: Simulated Annealing)
 
 ## Description
-Implementation of the Traveling Salesman Problem (TSP) usinng the Simmulated Annealing (SA) Algorithm written in GO.
+Implementation of the Traveling Salesman Problem (TSP) using the Simulated Annealing (SA) Algorithm written in GO.
 
+## TODO
+- Allow import of x,y data in CSV format
+ 
 ## Usage
- *Assuming that your gopath is configured properly*
- - `go build`
- - `go install`
- - `tsp-sa`
- #
+The following will return a path of Nodes in the shortest distance as a splice of Nodes ([]Node) containing *x* and *y* corridinates
+- `RunSARandom(itterations (int), temperature (float64), Mintemp (float64), coolrate (float64), max x cordinate (int), max y cordinate (int), number of locations (int), verbose (bool))`
+- TODO: `RunSAFromFile(itterations (int), temperature (float64), Mintemp (float64), coolrate (float64), filename (string))`
+## Testing
+- `go test` will run a few tests in the `tspsa_test.go` file
+
  
  #### Citation
  - http://katrinaeg.com/simulated-annealing.html
