@@ -8,3 +8,7 @@ Implementation of the Traveling Salesman Problem (TSP) usinng the Simmulated Ann
  - `go build`
  - `go install`
  - `tsp-sa`
+ #
+ 
+ #### Citation
+ - http://katrinaeg.com/simulated-annealing.html
