@@ -1,3 +1,2 @@
-TSP_FILE=a280.tsp
 all:
-    go build; go
+	go run main/run.go
