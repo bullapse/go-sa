@@ -22,7 +22,7 @@ func RunSARandom(it int, t float64, tmin float64, c float64, x int, y int, p int
 }
 
 /* TODO
- * Run Simmulated Annealing Algorithm
+ * Run Simmulated Annealing Algorithm from a given csv file
  */
 func RunSAFromFile(s string) {
 
