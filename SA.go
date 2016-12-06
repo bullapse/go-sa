@@ -17,8 +17,8 @@ import (
  * p: Number of Points
  * v: Verbose
  */
-func RunSARandom(it int, t float64, tmin float64, c float64, x int, y int, p int, v bool) {
-	RunSA(it, t, tmin, c, CreateRandomMAP(x, y, p), v)
+func RunSARandom(it int, t float64, tmin float64, c float64, x int, y int, p int, v bool) Route {
+	return RunSA(it, t, tmin, c, CreateRandomMAP(x, y, p), v)
 }
 
 /* TODO
@@ -40,7 +40,6 @@ func RunSA(it int, t float64, tmin float64, c float64, n []Node, p bool) Route {
 	// Set the Routes for the current SA given the list of nodes
 	cur  := Route{n, math.MaxFloat64}
 	cur.CalcDistance() // old cost
-	fmt.Printf("Old Cost: %.6f", cur.D)
 	best := Route{n, math.MaxFloat64}
 	next := Route{n, math.MaxFloat64}
 	l := cur.Nodes() // Length
@@ -61,8 +60,8 @@ func RunSA(it int, t float64, tmin float64, c float64, n []Node, p bool) Route {
 	}
 	if p {
 		fmt.Println(best.String())
+		fmt.Printf("Distance: %.6f\n", best.D)
 	}
-	fmt.Printf("Distance: %.6f\n", best.D)
 	return best
 }
 
