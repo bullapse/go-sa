@@ -3,6 +3,8 @@
 ## Description
 Implementation of the Traveling Salesman Problem (TSP) using the Simulated Annealing (SA) Algorithm written in GO.
 
+## Contributors
+- Spencer Bull (bullapse) [sgb695]
 ## TODO
 - Allow import of x,y data in CSV format
  
