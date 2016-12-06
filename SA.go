@@ -6,70 +6,59 @@ import (
 	"fmt"
 )
 
-type SA struct {
-	i int 				// Itterations
-	maxt float64			// Max Temp
-	mint float64			// Min Temp
-	t float64			// Initial Temperature
-	c float64			// Cooling Rate
-}
-
-/*
- * Create a new SA. (Not needed, but easier to use)
- * t: Initial Temperature
- * c: Cooling Rate
- */
-func NewSA(t float64, c float64) SA {
-	return SA{t,c}
-}
-
 /*
  * Wrapper to call SA with random points
+ * it: Itterations
+ * t: temp
+ * tmin: Min Temp
+ * c: coolrate
  * x: Number of x coordinates
  * y: Number of y coordinates
  * p: Number of Points
  */
-func (sa *SA) RunSARandom(x int, y int, p int) {
-	sa.RunSA(CreateRandomMAP(x, y, p))
+func RunSARandom(it int, t float64, tmin float64, c float64, x int, y int, p int) {
+	RunSA(it, t, tmin, c, CreateRandomMAP(x, y, p))
 }
 
 /* TODO
  * Run Simmulated Annealing Algorithm
  */
-func (sa *SA) RunSAFromFile(s string) {
+func RunSAFromFile(s string) {
 
 }
 
-func (sa *SA) RunSA(n []Node) []Node {
+/*
+ * Run the SA algorithm with the given itterations, temp, min temp, coolrate, and a splice of Node objects
+ *
+ * i:    Itterations
+ * t: 	 temp
+ * tmin: temp min
+ * c: 	 coolrate
+ */
+func RunSA(it int, t float64, tmin float64, c float64, n []Node) Route {
 	// Set the Routes for the current SA given the list of nodes
-	best := NewRoute(n)
-	cur := NewRoute(n)
-	next := NewRoute(n)
-	// get the length
-	l := cur.Cities()
-	for sa.t > 1 {
-		fp := rand.Intn(l)
-		sp := rand.Intn(l)
-		next.SwapNodes(fp, sp)
-		// get the current energy
-		ce := cur.CalcDistance()
-		// get the next energy
-		ne := next.CalcDistance()
-		// Should we accept next? TODO not sure if this is correct. Look at other algorithms
-		if acceptProb(ce, ne, sa.t) > float64(rand.Intn(l)) {
-			cur = next
+	cur  := NewRoute(n)
+	cur.CalcDistance() // old cost
+	best := cur
+	next := cur
+	l := cur.Nodes() // Length
+	for t > tmin {
+		for i := 0; i < it; i++ {
+			next.SwapNodes(rand.Intn(l), rand.Intn(l))
+			next.CalcDistance()
+			if acceptProb(cur.D, next.D, t) > float64(rand.Intn(l)) {
+				cur = next
+			}
+			if (cur.D < best.D) {
+				best = cur
+			}
 		}
-		if (cur.D < best.D) {
-			best = cur
-		}
-		sa.t *= 1-sa.c
+		t = t * c
 	}
 	fmt.Println(best.String())
 	fmt.Printf("Distance: %.6f\n", best.D)
-	return best.R
+	return best
 }
-
-
 
 /*
  * acceptance Probability Calculation

@@ -5,6 +5,7 @@ package tspsa
 
 import (
 	"math/rand"
+	"fmt"
 )
 
 /*
@@ -18,6 +19,7 @@ func CreateRandomMAP(x int, y int, p int) []Node{
 	var r []Node
 	for i := 0; i < p; i++ {
 		r = append(r, NewBlankNode(rand.Intn(x), rand.Intn(y)))
+		fmt.Printf("X: %i, Y: %")
 	}
 	return r
 }

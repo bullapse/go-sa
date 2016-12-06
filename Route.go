@@ -21,10 +21,10 @@ func NewRoute(r []Node) Route {
 }
 
 /*
- * Return the nubmer of cities in the route
+ * Return the nubmer of Nodes in the route
  * return: (int)
  */
-func (r *Route) Cities() int {
+func (r *Route) Nodes() int {
 	return len(r.R)
 }
 
@@ -34,10 +34,10 @@ func (r *Route) Cities() int {
  */
 func (r *Route) CalcDistance() float64 {
 	if r.D == 0 {
-		for i := 0; i < r.Cities(); i++ {
+		for i := 0; i < r.Nodes(); i++ {
 			s := r.R[i]
 			var e Node
-			if i+1 < r.Cities() {
+			if i+1 < r.Nodes() {
 				e = r.R[i+1]
 			} else {
 				e = r.R[0]
@@ -50,7 +50,7 @@ func (r *Route) CalcDistance() float64 {
 
 func (r *Route) String() string {
 	t := ""
-	for i := 0; i < r.Cities(); i++ {
+	for i := 0; i < r.Nodes(); i++ {
 		t += r.R[i].String()
 	}
 	return t
