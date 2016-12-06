@@ -1,6 +1,9 @@
 package tspsa
 
-import "math"
+import (
+	"math"
+	"strconv"
+)
 
 type Node struct {
 	x int		// x cord
@@ -19,12 +22,5 @@ func (i *Node) GetEuDistance(j *Node) float64 {
  * String function for Node
  */
 func (i *Node) String() string {
-	return "NODE:\tX: " +  string(i.x) + "\tY: " + string(i.y) + "\n"
-}
-
-/*
- * Create a new blank node
- */
-func NewBlankNode(x int, y int) Node {
-	return Node{x,y}
+	return "NODE:\tX: " +  strconv.FormatInt(int64(i.x), 10) + "\tY: " + strconv.FormatInt(int64(i.y), 10) + "\n"
 }

@@ -15,9 +15,10 @@ import (
  * x: Number of x coordinates
  * y: Number of y coordinates
  * p: Number of Points
+ * v: Verbose
  */
-func RunSARandom(it int, t float64, tmin float64, c float64, x int, y int, p int) {
-	RunSA(it, t, tmin, c, CreateRandomMAP(x, y, p))
+func RunSARandom(it int, t float64, tmin float64, c float64, x int, y int, p int, v bool) {
+	RunSA(it, t, tmin, c, CreateRandomMAP(x, y, p), v)
 }
 
 /* TODO
@@ -35,27 +36,32 @@ func RunSAFromFile(s string) {
  * tmin: temp min
  * c: 	 coolrate
  */
-func RunSA(it int, t float64, tmin float64, c float64, n []Node) Route {
+func RunSA(it int, t float64, tmin float64, c float64, n []Node, p bool) Route {
 	// Set the Routes for the current SA given the list of nodes
-	cur  := NewRoute(n)
+	cur  := Route{n, math.MaxFloat64}
 	cur.CalcDistance() // old cost
-	best := cur
-	next := cur
+	fmt.Printf("Old Cost: %.6f", cur.D)
+	best := Route{n, math.MaxFloat64}
+	next := Route{n, math.MaxFloat64}
 	l := cur.Nodes() // Length
 	for t > tmin {
 		for i := 0; i < it; i++ {
 			next.SwapNodes(rand.Intn(l), rand.Intn(l))
 			next.CalcDistance()
-			if acceptProb(cur.D, next.D, t) > float64(rand.Intn(l)) {
-				cur = next
+			if acceptProb(cur.D, next.D, t) >= 0.5 {
+				cur.R = next.R
+				cur.D = next.D
 			}
 			if (cur.D < best.D) {
-				best = cur
+				best.R = cur.R
+				best.D = cur.D
 			}
 		}
 		t = t * c
 	}
-	fmt.Println(best.String())
+	if p {
+		fmt.Println(best.String())
+	}
 	fmt.Printf("Distance: %.6f\n", best.D)
 	return best
 }
@@ -70,7 +76,7 @@ func acceptProb(e float64, ne float64, t float64) float64 {
 		return 1
 	} else {
 		// acceptance probability
-		return math.Exp(-1 * (e - ne) / t)
+		return math.Exp((e - ne) / t)
 	}
 }
 

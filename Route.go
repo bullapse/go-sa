@@ -6,6 +6,12 @@ type Route struct {
 	D float64 			// distance
 }
 
+/*
+ * Swap the Nodes in the Route for the given 2 positions
+ *
+ * n1: Node1 index
+ * n2: Node2 index
+ */
 func (r *Route) SwapNodes(n1 int, n2 int) {
 	t1 := r.R[n1]
 	t2 := r.R[n2]
@@ -14,14 +20,7 @@ func (r *Route) SwapNodes(n1 int, n2 int) {
 }
 
 /*
- * Create a new route from a given TSPMAP's Nodes
- */
-func NewRoute(r []Node) Route {
-	return Route{r,0}
-}
-
-/*
- * Return the nubmer of Nodes in the route
+ * Return the number of Nodes in the route
  * return: (int)
  */
 func (r *Route) Nodes() int {
@@ -33,21 +32,23 @@ func (r *Route) Nodes() int {
  * return: Route Distance (float64)
  */
 func (r *Route) CalcDistance() float64 {
-	if r.D == 0 {
-		for i := 0; i < r.Nodes(); i++ {
-			s := r.R[i]
-			var e Node
-			if i+1 < r.Nodes() {
-				e = r.R[i+1]
-			} else {
-				e = r.R[0]
-			}
-			r.D += s.GetEuDistance(&e)
+	td := 0.0
+	for i := 0; i < r.Nodes(); i++ {
+		s := r.R[i]
+		var e Node
+		if i+1 < r.Nodes() {
+			e = r.R[i+1]
+		} else {
+			e = r.R[0]
 		}
+		td += s.GetEuDistance(&e)
 	}
+	r.D = td
 	return r.D
 }
-
+/*
+ * String function for the Route Struct
+ */
 func (r *Route) String() string {
 	t := ""
 	for i := 0; i < r.Nodes(); i++ {

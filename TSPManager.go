@@ -1,11 +1,7 @@
-/*
- *http://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6
- */
 package tspsa
 
 import (
 	"math/rand"
-	"fmt"
 )
 
 /*
@@ -18,8 +14,8 @@ import (
 func CreateRandomMAP(x int, y int, p int) []Node{
 	var r []Node
 	for i := 0; i < p; i++ {
-		r = append(r, NewBlankNode(rand.Intn(x), rand.Intn(y)))
-		fmt.Printf("X: %i, Y: %")
+		n := Node{rand.Intn(x), rand.Intn(y)}
+		r = append(r, n)
 	}
 	return r
 }
